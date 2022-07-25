@@ -35,6 +35,6 @@ public class Controller {
         log.info("https://192.168.0.104:8080/Main/S");
         log.info("A: " + serviceA);
         log.info("B: " + serviceB);
-        return "\n" + serviceA.getData() + "\n" + serviceB.getData();
+        return "\n" + services.getData() + "\n" + services.getData();
     }
 }

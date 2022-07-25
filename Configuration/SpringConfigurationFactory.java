@@ -25,11 +25,11 @@ public class SpringConfigurationFactory {
 //
 //    }
 
-//    @Bean("Controller")
-//    public Controller controller(){
-//        Controller controller = new Controller();
+    @Bean("Controller")
+    public Controller controller(){
+        Controller controller = new Controller();
 //        controller.setServiceA(serviceA());
 //        controller.setServiceB(serviceB());
-//        return controller;
-//    }
+       return controller;
+    }
 }
