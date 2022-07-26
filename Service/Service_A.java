@@ -4,7 +4,7 @@ package com.company.Service;
 import org.springframework.context.annotation.Primary;
 
 @org.springframework.stereotype.Service
-@Primary
+//@Primary
 public class Service_A implements Service {
 
     @Override
