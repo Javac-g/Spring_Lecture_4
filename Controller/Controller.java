@@ -1,5 +1,8 @@
 package com.company.Controller;
 
+import com.company.Model.DataEntity;
+import com.company.Reposytory.DataRepository;
+import com.company.Service.EntityService;
 import com.company.Service.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,19 +11,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.List;
 
 @RequestMapping("/Main")
 public class Controller {
     private final static Logger log = LoggerFactory.getLogger(Controller.class);
-
+    @Autowired
+    private DataRepository dataRepository;
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    @Qualifier("EntityService")
+    private EntityService entityService;
 
     @Autowired              // Direct mapping by value
     @Qualifier("Service_B")
@@ -53,4 +60,16 @@ public class Controller {
     private void shutdown(){
         ((ConfigurableApplicationContext)applicationContext).close();
     }
+
+    @GetMapping(value = "/getData",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<DataEntity> getData(){
+        return entityService.getData();
+    }
+    @PostMapping(value = "/sendData",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void setData(@RequestBody personDTO person){
+         entityService.setData(person);
+    }
+
 }
